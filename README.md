@@ -1,6 +1,16 @@
 colobot-dat: read game data files from Colobot
 ==============================================
 
+**This code is obsolete!** The [open-source Colobot project][colobot] hasn't
+used the DAT container format since [colobot/colobot@6cce7ec6][commit]; this
+code is of use to the historically curious only and shouldn't actually be used
+for anything. It especially shouldn't be used for anyone wanting a container
+file format, because this format is a terrible one; use tarballs or zip files
+instead.
+
+[colobot]: https://github.com/colobot/colobot
+[commit]: https://github.com/colobot/colobot/commit/6cce7ec6fd262178ce91d218f9287363842349cd
+
 Release builds of Ceebot and Colobot store their game files in DAT containers.
 This project consists of (1) a library for reading DAT files and (2) a
 command-line utility to extract files from a DAT container.
@@ -11,10 +21,12 @@ Library
 Read a container file by passing an `io.ReaderAt` and a `Codec` to `New()`.  A
 `Codec` XORs data in the container with a predefined table; `Codec`s for the
 demo and full versions of Ceebot and Colobot are included with the library.
-(The tables were extracted from the Colobot source code at
-[github.com/adiblol/colobot].)  The resulting `Container` contains a slice of
+(The tables were extracted from the [src/metafile.cpp][metafile] of the
+original Colobot source.)  The resulting `Container` contains a slice of
 `File`s, each of which has an `io.SectionReader` which will read the data from
 that file.
+
+[metafile]: https://github.com/colobot/colobot/blob/colobot-original/src/metafile.cpp
 
 Command-line extractor
 ======================
